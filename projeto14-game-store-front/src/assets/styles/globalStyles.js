@@ -8,9 +8,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         background: #1D2033;
         font-family: 'Roboto', sans-serif;
-        padding: 25px;
         margin: 0;
-        overflow: hidden;
     }
 
     h1 {

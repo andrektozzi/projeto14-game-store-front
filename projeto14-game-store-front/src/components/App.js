@@ -6,6 +6,7 @@ import GlobalStyle from "../assets/styles/globalStyles";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Home from "./Home";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -15,6 +16,7 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
+        <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

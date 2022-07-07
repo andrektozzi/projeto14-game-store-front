@@ -31,9 +31,9 @@ export default function SignUp() {
     }
 
     try {
-      await axios.post("http://localhost:3000/signup", body);
+      await axios.post("https://projeto-game-store-driven.herokuapp.com/signup", body);
       alert("Seu usuário foi criado com sucesso!");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       const message = error.response.statusText;
       alert(message);
@@ -92,7 +92,9 @@ export default function SignUp() {
       flex-direction: column;
       font-family: "Lexend Deca", sans-serif;
       height: 100vh;
+      padding: 25px;
     `;
+
     const SignupForms = styled.form`
       width: 100%;
       display: flex;

@@ -22,7 +22,7 @@ export default function Login() {
         };
 
         try {
-            const response = await axios.post("http://localhost:3000/login", body);
+            const response = await axios.post("https://projeto-game-store-driven.herokuapp.com/login", body);
             const { name, email, token } = response.data;
 
             setUser({
@@ -76,7 +76,9 @@ const Container = styled.div`
   flex-direction: column;
   font-family: "Lexend Deca", sans-serif;
   height: 100vh;
+  padding: 25px;
 `;
+
 const LoginForms = styled.form`
   width: 100%;
   display: flex;
