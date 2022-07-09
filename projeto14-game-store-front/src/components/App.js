@@ -7,6 +7,7 @@ import GlobalStyle from "../assets/styles/globalStyles";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Home from "./Home";
+import TheSimsPage from "./TheSimsPage";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/thesims" element={<TheSimsPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
