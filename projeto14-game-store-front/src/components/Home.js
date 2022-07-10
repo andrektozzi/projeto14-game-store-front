@@ -8,42 +8,13 @@ import Battlefield from "./images/Battlefield.png"
 import LostInRandom from "./images/LostInRandom.png"
 import StarWars from "./images/StarWars.png"
 import WayOut from "./images/WayOut.png"
+import Menu from "./Menu";
 
 export default function Home () {
 
     return(
         <Container>
-            <Navbar>
-                <Link to="/signup">
-                    <ion-icon name="person-add-outline"></ion-icon>
-                </Link>    
-                <Link to="/login">
-                    <ion-icon name="log-in-outline"></ion-icon>
-                </Link>
-                <Link to="/cart">
-                    <ion-icon name="cart-outline"></ion-icon>
-                </Link>          
-            </Navbar>
-            <Category>
-                <Link to="/thesims">
-                    <p>The Sims</p>
-                </Link>
-                <Link to="/esportes">
-                    <p>Esportes</p>
-                </Link>
-                <Link to="/fps">
-                    <p>FPS</p>
-                </Link>
-                <Link to="/rpg">
-                    <p>RPG</p>
-                </Link>
-                <Link to="/starwars">
-                    <p>Star Wars</p>
-                </Link>
-                <Link to="/acao">
-                    <p>Ação</p>
-                </Link>                      
-            </Category>
+            <Menu/>
             <Header>
                 <h1>Game Store</h1>
             </Header>
@@ -56,7 +27,7 @@ export default function Home () {
                     <p>The Sims</p>  
                 </Game>
                 <Game>
-                    <Link to="/esportes">
+                    <Link to="/sports">
                         <img src={Fifa} alt="Fifa"/>
                     </Link>
                     <p>Esportes</p>  
@@ -80,7 +51,7 @@ export default function Home () {
                     <p>Star Wars</p>  
                 </Game>
                 <Game>
-                    <Link to="/acao">
+                    <Link to="/action">
                         <img src={WayOut} alt="WayOut" />
                     </Link>
                     <p>Ação</p>  
@@ -109,48 +80,6 @@ const Container = styled.div`
     h2 {
         font-size: 40px;
     }
-`;
-
-const Navbar = styled.div`
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: black;
-
-    ion-icon {
-        font-size: 30px;
-        margin-right: 20px;
-        margin-bottom: 25px;
-    }
-
-    ion-icon:hover {
-        transform: scale(1.1);
-    }
-`;
-
-const Category = styled.div`
-    width: 100%;
-    height: 50px;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-   
-   p {
-    color: black;
-    font-size: 20px;
-    font-weight: 400;
-    cursor: pointer;
-    margin-bottom: 30px;
-   }
-
-   p:hover {
-    opacity:0.7;
-    color: darkgrey;
-    transform: scale(1.1);
-}
 `;
 
 const Header = styled.div`
