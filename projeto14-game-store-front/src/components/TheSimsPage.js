@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "./Menu";
 import Menu from "./Menu";
 import styled from "styled-components";
 import UserContext from "../context/UserContext";
@@ -82,15 +80,76 @@ function Game({title, description, urlImage, price, token}){
 
     return(
         <GameBox>
-            <div> {title}</div>
-            <img src={urlImage} />
-            <div>{description}</div>
-            <div>{price}</div>
+            <MainText>
+            <LeftSide>
+            <h2> {title}</h2>
+            <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
             <button onClick={addToCart}> add to Cart</button>
+            </LeftSide>
+            <img src={urlImage} alt={title}/>
+            </MainText>
+            <Text><p>{description}</p></Text>
         </GameBox>
     )
 }
-const Container = styled.div``
-const Games = styled.div``
-const GameBox = styled.div``
+const Container = styled.div`
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+    background-color: #F3F3F3;
 
+    h1 {
+        font-size: 70px;
+        color: black;
+    }
+    
+    h2 {
+        font-size: 30px;
+        color: green;
+        width: 250px;;
+        text-align: center;
+    }
+
+    p{
+        font-size: 16px;
+        color: black;
+    }
+`
+const Games = styled.div``
+const GameBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+
+    img{
+        width: 80%;
+        height: 400px;
+    }
+`
+const MainText = styled.div`
+display:flex;
+flex-direction:row;
+margin-bottom: 15px;
+
+button{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    color: green;
+    background-color: lightgreen;
+    border-radius: 5px;
+}
+`
+
+const LeftSide = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+margin: 10px 0;
+`
+
+const Text = styled.div`
+    margin-bottom: 15px;
+`
