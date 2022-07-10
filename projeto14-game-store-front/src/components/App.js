@@ -9,6 +9,7 @@ import SignUp from "./SignUp";
 import Home from "./Home";
 import TheSimsPage from "./TheSimsPage";
 import SportsPage from "./SportsPage";
+import StarWarsPage from "./StarWarsPage";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -23,7 +24,7 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/thesims" element={<TheSimsPage />} />
           <Route path="/sports" element={<SportsPage />} />
-
+          <Route path="/starwars" element={<StarWarsPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
