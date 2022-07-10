@@ -31,7 +31,8 @@ export default function SignUp() {
     }
 
     try {
-      await axios.post("https://game-store-driven.herokuapp.com/signup", body);
+      await axios.post("http://localhost:5000/signup", body);
+      //https://game-store-driven.herokuapp.com
       alert("Seu usuário foi criado com sucesso!");
       navigate("/login");
     } catch (error) {

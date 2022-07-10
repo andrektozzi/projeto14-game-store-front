@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Menu";
 import Menu from "./Menu";
@@ -7,14 +8,11 @@ import UserContext from "../context/UserContext";
 
 export default function TheSimsPage(){
 
-    const URL = "https://game-store-driven.herokuapp.com/products"
-
+    const URL = "http://localhost:5000/products"
+//https://game-store-driven.herokuapp.com
     const {user} = useContext(UserContext);
     console.log(user);
-    const config = {
-    headers: {
-        "Authorization": `Bearer ${user.token}`
-    }}
+    
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
@@ -40,7 +38,7 @@ export default function TheSimsPage(){
 
         return(
             <>
-            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price}/>)}
+            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token}/>)}
             </>
         )
     }
@@ -55,7 +53,32 @@ export default function TheSimsPage(){
         )
 }
 
-function Game({title, description, urlImage, price}){
+function Game({title, description, urlImage, price, token}){
+  
+    async function addToCart(){
+        console.log(token)
+        const URL = "http://localhost:5000/cart"
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        
+        const body = {title, urlImage, price}
+        
+        if(!token){
+            console.log("não tem token")
+            alert("It's necessary to be logged to add games to cart... Please, log in")
+        } else{
+            try {
+                const cartProduct = await axios.post(URL, body, config);
+                console.log(cartProduct)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+    }
 
     return(
         <GameBox>
@@ -63,7 +86,7 @@ function Game({title, description, urlImage, price}){
             <img src={urlImage} />
             <div>{description}</div>
             <div>{price}</div>
-            <button> add to Cart</button>
+            <button onClick={addToCart}> add to Cart</button>
         </GameBox>
     )
 }
