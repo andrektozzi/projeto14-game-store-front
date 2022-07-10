@@ -4,7 +4,7 @@ import Menu from "./Menu";
 import styled from "styled-components";
 import UserContext from "../context/UserContext";
 
-export default function TheSimsPage(){
+export default function FPSPage(){
 
     const URL = "http://localhost:5000/products"
 //https://game-store-driven.herokuapp.com
@@ -20,9 +20,9 @@ export default function TheSimsPage(){
     
                 const games = await axios.get(URL);
                 console.log(games.data);
-                console.log(games.data.filter(e => e.category === "thesims"));
-                const thesimsGames = games.data.filter(e => e.category === "thesims");
-                setProducts(thesimsGames);
+                console.log(games.data.filter(e => e.category === "fps"));
+                const fpsGames = games.data.filter(e => e.category === "fps");
+                setProducts(fpsGames);
                 
             } catch (error) {
                 console.log(error.message);
@@ -106,7 +106,7 @@ const Container = styled.div`
     
     h2 {
         font-size: 30px;
-        color: green;
+        color: blue;
         width: 250px;;
         text-align: center;
     }
@@ -136,8 +136,8 @@ button{
     width: 130px;
     height: 90px;
     margin-bottom: 20px;
-    color: green;
-    background-color: lightgreen;
+    color: blue;
+    background-color: lightblue;
     border-radius: 5px;
 }
 `

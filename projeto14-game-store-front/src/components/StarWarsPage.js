@@ -84,7 +84,7 @@ function Game({title, description, urlImage, price, token}){
             <LeftSide>
             <h2> {title}</h2>
             <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
-            <button onClick={addToCart}> add to Cart</button>
+            <button onClick={addToCart}> adicionar ao Carrinho</button>
             </LeftSide>
             <img src={urlImage} alt={title}/>
             </MainText>
@@ -133,8 +133,8 @@ flex-direction:row;
 margin-bottom: 15px;
 
 button{
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 90px;
     margin-bottom: 20px;
     color: orange;
     background-color: lightgray;
