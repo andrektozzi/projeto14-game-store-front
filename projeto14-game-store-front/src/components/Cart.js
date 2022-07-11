@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import UserContext from "../context/UserContext";
 import axios from "axios";
 import styled from "styled-components";
-import { IoCartOutline, IoCloseCircleSharp } from "react-icons/io5";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -151,7 +151,9 @@ export default function Cart() {
             <Header>
                 <span>Meu carrinho</span>
                 <i>
-                  <IoCartOutline />
+                  <Link to="/">
+                    <ion-icon name="home-outline"></ion-icon>
+                  </Link>                  
                 </i>
             </Header>
             <Container productsCart={productsCart}>
@@ -199,9 +201,14 @@ const Header = styled.div`
     font-family: "Roboto", sans-serif;
     font-size: 20px;
   }
-  i {
-    font-size: 27px;
-  }
+  
+  ion-icon {
+        font-size: 30px;
+    }
+
+    ion-icon:hover {
+        transform: scale(1.1);
+    }
 `;
 
 const Products = styled.div`
@@ -237,8 +244,8 @@ const Product = styled.div`
     cursor: pointer;
   }
   img {
-    width: 130px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
   }
 `;
 
