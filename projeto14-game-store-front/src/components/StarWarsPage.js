@@ -11,6 +11,7 @@ export default function StarWarsPage(){
     const {user} = useContext(UserContext);
     
     const [products, setProducts] = useState([]);
+    const [route, setRoute] = useState('/cart')
     
     useEffect(() => {
 
@@ -20,6 +21,8 @@ export default function StarWarsPage(){
                 const games = await axios.get(URL);
                 const starwarsGames = games.data.filter(e => e.category === "starwars");
                 setProducts(starwarsGames);
+                if(!user.token) setRoute('/login')
+
                 
             } catch (error) {
                 console.log(error.message);
@@ -33,7 +36,7 @@ export default function StarWarsPage(){
 
         return(
             <>
-            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token}/>)}
+            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token} route = {route}/>)}
             </>
         )
     }
@@ -48,10 +51,9 @@ export default function StarWarsPage(){
         )
 }
 
-function Game({title, description, urlImage, price, token}){
+function Game({title, description, urlImage, price, token, route}){
   
     async function addToCart(){
-        console.log(token)
         const URL = "https://game-store-driven.herokuapp.com/cart"
         const config = {
             headers: {
@@ -66,7 +68,6 @@ function Game({title, description, urlImage, price, token}){
         } else{
             try {
                 const cartProduct = await axios.post(URL, body, config);
-                console.log(cartProduct);
             } catch (error) {
                 console.log(error)
             }
@@ -80,7 +81,7 @@ function Game({title, description, urlImage, price, token}){
             <LeftSide>
             <h2> {title}</h2>
             <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
-                <Link to="/cart">
+                <Link to={route}>
                     <button onClick={addToCart}> adicionar ao Carrinho</button>
                 </Link>  
             </LeftSide>

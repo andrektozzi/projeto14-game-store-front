@@ -11,6 +11,7 @@ export default function RPGPage(){
     const {user} = useContext(UserContext);
     
     const [products, setProducts] = useState([]);
+    const [route, setRoute] = useState('/cart')
     
     useEffect(() => {
 
@@ -20,6 +21,7 @@ export default function RPGPage(){
                 const games = await axios.get(URL);
                 const rpgGames = games.data.filter(e => e.category === "rpg");
                 setProducts(rpgGames);
+                if(!user.token) setRoute('/login')
                 
             } catch (error) {
                 console.log(error.message);
@@ -33,7 +35,7 @@ export default function RPGPage(){
 
         return(
             <>
-            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token}/>)}
+            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token} route = {route}/>)}
             </>
         )
     }
@@ -48,7 +50,7 @@ export default function RPGPage(){
         )
 }
 
-function Game({title, description, urlImage, price, token}){
+function Game({title, description, urlImage, price, token, route}){
   
     async function addToCart(){
         const URL = "https://game-store-driven.herokuapp.com/cart"
@@ -65,7 +67,6 @@ function Game({title, description, urlImage, price, token}){
         } else{
             try {
                 const cartProduct = await axios.post(URL, body, config);
-                console.log(cartProduct)
             } catch (error) {
                 console.log(error)
             }
@@ -79,7 +80,7 @@ function Game({title, description, urlImage, price, token}){
             <LeftSide>
             <h2> {title}</h2>
             <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
-                <Link to="/cart">
+                <Link to={route}>
                     <button onClick={addToCart}> adicionar ao Carrinho</button>
                 </Link>  
             </LeftSide>

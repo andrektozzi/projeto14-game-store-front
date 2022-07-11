@@ -63,11 +63,9 @@ function Game({title, description, urlImage, price, token, route}){
         
         if(!token){
             alert("É necessário estar logado para adicionar produtos ao carrinho. Por favor, faça login!")
-            console.log(route)
         } else{
             try {
                 const cartProduct = await axios.post(URL, body, config);
-                console.log(cartProduct)
             } catch (error) {
                 console.log(error)
             }
