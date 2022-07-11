@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import Menu from "./Menu";
 import UserContext from "../context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Checkout(){
-
+  const navigate = useNavigate();
+    
     const { user } = useContext(UserContext);
     console.log(user);
     const { name, email, token } = user;
@@ -16,6 +17,7 @@ export default function Checkout(){
     const [cardnumber, setCardnumber] = useState('');
     const [expdate, setExpdate] = useState('');
     const [cvv, setCvv] = useState('');
+  
     
 
     useEffect(() => {
@@ -114,6 +116,7 @@ export default function Checkout(){
                 config
             );
             alert('Parabéns! Sua compra foi finalizada')
+            DeleteCart();
             
         } catch (error) {
             const message = error.response.statusText;
@@ -121,13 +124,50 @@ export default function Checkout(){
         }
     }
 
+    async function DeleteCart(_id) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
+      try {
+        await axios.delete(
+          `https://game-store-driven.herokuapp.com/cart/${_id}`,
+          config
+        );
+        DeleteCheckout();
+      } catch (error) {
+        const message = error.response.statusText;
+        alert(message);
+      }
+    }
+
+    async function DeleteCheckout() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
+      try {
+        await axios.delete(
+          `https://game-store-driven.herokuapp.com/checkout`,
+          config
+        );
+        navigate("/");
+      } catch (error) {
+        const message = error.response.statusText;
+        alert(message);
+      }
+    }
 
  return (
     <>
         <Menu/>
         
         <Container>
-            <form>
+            <div>
                 <h3>Seus Dados</h3>
                 <label>Nome</label>
                 <input type='text' value={name} disabled/>
@@ -139,21 +179,27 @@ export default function Checkout(){
                 {RenderTotal()}
 
                 <h3> Seus Dados Bancários</h3>
-                <label>Cartões Aceitos</label>
                 <label>Nome no Cartão</label>
-                <input type="text" name="cardname" placeholder="John More Doe" value={cardname} onChange={(e) => setCardname(e.target.value)}/>
+                <input 
+                  required
+                  type="text" 
+                  name="cardname" 
+                  placeholder="John More Doe" 
+                  value={cardname}
+                  onChange={(e) => setCardname(e.target.value)}
+                />
                 <label>Número do Cartão</label>
-                <input type="text" name="cardnumber" placeholder="1111-2222-3333-4444" value={cardnumber} onChange={(e) => setCardnumber(e.target.value)}/>
+                <input required type="text" name="cardnumber" placeholder="1111-2222-3333-4444" value={cardnumber} onChange={(e) => setCardnumber(e.target.value)}/>
                 <label > Data de Validade</label>
-                <input type="text"  name="expdate" placeholder="06/23" value={expdate} onChange={(e) => setExpdate(e.target.value)}/>
+                <input required type="text"  name="expdate" placeholder="06/23" value={expdate} onChange={(e) => setExpdate(e.target.value)}/>
                 <label>CVC</label>
-                <input type="text" name="cvv" placeholder="352" value={cvv} onChange={(e) => setCvv(e.target.value)}></input>
-                <Link to={'/home'}>
+                <input required type="text" name="cvv" placeholder="352" value={cvv} onChange={(e) => setCvv(e.target.value)}></input>
+                <Link to="/">
                     <Button>
                         <button onClick={SubmitCheckout}>Finalizar Compra</button>
                     </Button>
                 </Link>
-            </form>
+            </div>
 
         </Container>  
     </>
@@ -179,6 +225,10 @@ const Container = styled.div`
     h2 {
         font-size: 40px;
     }
+
+    h3 {
+      margin-top: 50px;
+    }
 `;
 const Products = styled.div`
   width: 100%;
@@ -199,7 +249,7 @@ const Product = styled.div`
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     margin-bottom: 70px;
-    color: #ffffff;
+    color: black;
   }
   span:nth-child(3) {
     font-weight: 700;
@@ -231,8 +281,6 @@ const Total = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
-  bottom: 200px;
   padding: 15px;
   span {
     color: #ffffff;
