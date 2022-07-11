@@ -7,6 +7,7 @@ import GlobalStyle from "../assets/styles/globalStyles";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Home from "./Home";
+import Checkout from "./Checkout";
 
 import Cart from "./Cart";
 import TheSimsPage from "./TheSimsPage";
@@ -28,6 +29,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+
           <Route path="/thesims" element={<TheSimsPage />} />
           <Route path="/sports" element={<SportsPage />} />
           <Route path="/starwars" element={<StarWarsPage />} />
