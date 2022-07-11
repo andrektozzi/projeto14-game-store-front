@@ -22,7 +22,7 @@ export default function Cart() {
     
           try {
             const { data } = await axios.get(
-              "https://game-store-driven.herokuapp.com/cart"
+              "https://game-store-driven.herokuapp.com/cart", config
             );
     
             setProductsCart(data);
@@ -86,9 +86,12 @@ export default function Cart() {
                     <span>SALDO</span>
                     <span>${total}</span>
                   </Total>
-                  <button
-                    onClick={() => SubmitCheckout(total)}
-                  ></button>
+                  <Button>
+                    <button
+                      onClick={() => SubmitCheckout(total)}
+                    >CHECKOUT</button>
+                  </Button>
+                  
                 </>
             );
         }
@@ -266,4 +269,12 @@ const Total = styled.div`
   span:nth-child(2) {
     color: #ffab2d;
   }
+`;
+
+const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
 `;
