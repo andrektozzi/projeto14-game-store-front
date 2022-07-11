@@ -9,6 +9,7 @@ export default function Menu(){
                 <Link to="/">
                     <ion-icon name="home-outline"></ion-icon>
                 </Link> 
+                
                 <Link to="/signup">
                     <ion-icon name="person-add-outline"></ion-icon>
                 </Link>    

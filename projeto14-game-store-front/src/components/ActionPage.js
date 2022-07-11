@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function ActionPage(){
 
     const URL = "https://game-store-driven.herokuapp.com/products"
+    
     const {user} = useContext(UserContext);
     
     const [products, setProducts] = useState([]);

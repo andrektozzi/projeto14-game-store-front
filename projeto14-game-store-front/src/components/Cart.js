@@ -14,6 +14,7 @@ export default function Cart() {
 
     useEffect(() => {
         async function GetProductsCart() {
+          
           const config = {
             headers: {
               Authorization: `Bearer ${token}`,
