@@ -134,6 +134,7 @@ export default function Cart() {
             total: parseFloat(total),
         };
         
+        console.log(body);
         try {
             await axios.post(
                 "https://game-store-driven.herokuapp.com/checkout",
