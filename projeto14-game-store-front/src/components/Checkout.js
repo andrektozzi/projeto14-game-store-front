@@ -133,7 +133,7 @@ export default function Checkout(){
   
       try {
         await axios.delete(
-          `https://game-store-driven.herokuapp.com/cart/${_id}`,
+          `https://game-store-driven.herokuapp.com/cart`,
           config
         );
         DeleteCheckout();
