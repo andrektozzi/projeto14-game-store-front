@@ -16,7 +16,7 @@ export default function Menu(){
                     <ion-icon name="cart-outline"></ion-icon>
                 </Link>          
             </Navbar>
-            <Category>
+            <Category> 
                 <Link to="/thesims">
                     <p>The Sims</p>
                 </Link>

@@ -87,11 +87,9 @@ export default function Cart() {
                     <span>${total}</span>
                   </Total>
                   <Button>
-                    <button
-                      onClick={() => SubmitCheckout(total)}
-                    >CHECKOUT</button>
+                    <button onClick={() => SubmitCheckout(total)}>CHECKOUT</button>
                   </Button>
-                  
+                    
                 </>
             );
         }

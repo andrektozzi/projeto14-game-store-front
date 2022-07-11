@@ -9,9 +9,9 @@ export default function StarWarsPage(){
 
     const URL = "https://game-store-driven.herokuapp.com/products"
     const {user} = useContext(UserContext);
-    console.log(user);
     
     const [products, setProducts] = useState([]);
+    const [route, setRoute] = useState('/cart')
     
     useEffect(() => {
 
@@ -19,10 +19,10 @@ export default function StarWarsPage(){
             try {
     
                 const games = await axios.get(URL);
-                console.log(games.data);
-                console.log(games.data.filter(e => e.category === "starwars"));
                 const starwarsGames = games.data.filter(e => e.category === "starwars");
                 setProducts(starwarsGames);
+                if(!user.token) setRoute('/login')
+
                 
             } catch (error) {
                 console.log(error.message);
@@ -36,7 +36,7 @@ export default function StarWarsPage(){
 
         return(
             <>
-            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token}/>)}
+            {products.map((e, index) => <Game key = {index} title = {e.title} description = {e.description} urlImage = {e.urlImage} price = {e.price} token = {user.token} route = {route}/>)}
             </>
         )
     }
@@ -51,10 +51,9 @@ export default function StarWarsPage(){
         )
 }
 
-function Game({title, description, urlImage, price, token}){
+function Game({title, description, urlImage, price, token, route}){
   
     async function addToCart(){
-        console.log(token)
         const URL = "https://game-store-driven.herokuapp.com/cart"
         const config = {
             headers: {
@@ -65,12 +64,10 @@ function Game({title, description, urlImage, price, token}){
         const body = {title, urlImage, price}
         
         if(!token){
-            console.log("não tem token")
-            alert("É necessário estar logado para adicionar jogos ao carrinho. Por favor, faça!")
+            alert("É necessário estar logado para adicionar produtos ao carrinho. Por favor, faça login!")
         } else{
             try {
                 const cartProduct = await axios.post(URL, body, config);
-                console.log(cartProduct)
             } catch (error) {
                 console.log(error)
             }
@@ -84,9 +81,9 @@ function Game({title, description, urlImage, price, token}){
             <LeftSide>
             <h2> {title}</h2>
             <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
-                <Link to="/cart">
-                 <button onClick={addToCart}> adicionar ao Carrinho</button>
-                </Link>     
+                <Link to={route}>
+                    <button onClick={addToCart}> adicionar ao Carrinho</button>
+                </Link>  
             </LeftSide>
             <img src={urlImage} alt={title}/>
             </MainText>
