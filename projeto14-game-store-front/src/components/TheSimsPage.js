@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 
 export default function TheSimsPage(){
 
-    const URL = "http://localhost:5000/products"
+    const URL = "https://game-store-driven.herokuapp.com/products"
 //https://game-store-driven.herokuapp.com
     const {user} = useContext(UserContext);
     console.log(user);

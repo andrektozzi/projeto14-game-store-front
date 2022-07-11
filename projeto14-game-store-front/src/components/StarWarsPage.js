@@ -3,13 +3,12 @@ import axios from "axios";
 import Menu from "./Menu";
 import styled from "styled-components";
 import UserContext from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 export default function StarWarsPage(){
 
-    const URL = "http://localhost:5000/products"
-//https://game-store-driven.herokuapp.com
+    const URL = "https://game-store-driven.herokuapp.com/products"
     const {user} = useContext(UserContext);
-    console.log(user);
     
     const [products, setProducts] = useState([]);
     
@@ -19,8 +18,6 @@ export default function StarWarsPage(){
             try {
     
                 const games = await axios.get(URL);
-                console.log(games.data);
-                console.log(games.data.filter(e => e.category === "starwars"));
                 const starwarsGames = games.data.filter(e => e.category === "starwars");
                 setProducts(starwarsGames);
                 
@@ -55,7 +52,7 @@ function Game({title, description, urlImage, price, token}){
   
     async function addToCart(){
         console.log(token)
-        const URL = "http://localhost:5000/cart"
+        const URL = "https://game-store-driven.herokuapp.com/cart"
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -65,12 +62,11 @@ function Game({title, description, urlImage, price, token}){
         const body = {title, urlImage, price}
         
         if(!token){
-            console.log("não tem token")
-            alert("It's necessary to be logged to add games to cart... Please, log in")
+            alert("É necessário estar logado para adicionar produtos ao carrinho. Por favor, faça login!")
         } else{
             try {
                 const cartProduct = await axios.post(URL, body, config);
-                console.log(cartProduct)
+                console.log(cartProduct);
             } catch (error) {
                 console.log(error)
             }
@@ -84,7 +80,9 @@ function Game({title, description, urlImage, price, token}){
             <LeftSide>
             <h2> {title}</h2>
             <p>{'R$' + price.toFixed(2).replace('.',',')}</p>
-            <button onClick={addToCart}> adicionar ao Carrinho</button>
+                <Link to="/cart">
+                    <button onClick={addToCart}> adicionar ao Carrinho</button>
+                </Link>  
             </LeftSide>
             <img src={urlImage} alt={title}/>
             </MainText>

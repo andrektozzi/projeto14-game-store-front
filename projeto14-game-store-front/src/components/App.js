@@ -16,7 +16,6 @@ import RPGPage from "./RPGPage";
 import FPSPage from "./FPSPage";
 import ActionPage from "./ActionPage";
 
-
 export default function App() {
   const [user, setUser] = useState({});
 
